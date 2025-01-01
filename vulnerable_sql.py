@@ -1,13 +1,13 @@
 import sqlite3
 
 def get_user_input():
-    user_input = input("Entrez votre nom d'utilisateur : ")
+    user_input = input("Enter username: ")  # Données utilisateur non sécurisées
     return user_input
 
 def query_database(user_input):
     conn = sqlite3.connect("example.db")
     cursor = conn.cursor()
-    # Requête SQL vulnérable
+    # Injection SQL possible
     cursor.execute(f"SELECT * FROM users WHERE name = '{user_input}'")
     print(cursor.fetchall())
 
