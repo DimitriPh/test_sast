@@ -1,0 +1,26 @@
+name: Analyse CodeQL
+
+on:
+  push:
+    branches: [ "main" ] # Lance l'analyse à chaque changement sur la branche principale
+  pull_request:
+    branches: [ "main" ] # Lance l'analyse sur les PRs vers la branche principale
+  schedule:
+    - cron: '0 3 * * 1' # Planifie une analyse chaque lundi à 03:00 UTC
+
+jobs:
+  analyze:
+    name: Analyse
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: 'javascript,python' # Ajoute les langages utilisés dans ton projet
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
