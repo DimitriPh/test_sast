@@ -1,19 +1,12 @@
 name: Analyse CodeQL
 
-queries:
-  - uses: codeql/python-queries
-
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ] # Analyse les changements sur la branche principale
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ] # Analyse les PRs sur la branche principale
   schedule:
     - cron: '0 3 * * 1' # Planifie une analyse chaque lundi à 03:00 UTC
-
-permissions:
-  contents: write
-  security-events: write
 
 jobs:
   analyze:
@@ -21,13 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: 'javascript,python'
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: 'python, javascript' # Ajoute les langages que tu utilises
+        config-file: .github/codeql-config.yml # Inclut un fichier de configuration personnalisé
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
