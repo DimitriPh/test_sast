@@ -1,5 +1,8 @@
 name: Analyse CodeQL
 
+queries:
+  - uses: codeql/python-queries
+
 on:
   push:
     branches: [ "main" ]
