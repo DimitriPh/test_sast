@@ -1,4 +1,2 @@
-name: "CodeQL config"
-queries:
-  - name: "Default Python Queries" # Requêtes Python par défaut
-  - name: "Default JavaScript Queries" # Requêtes JavaScript par défaut
+name: "CodeQL Default Queries"
+queries: []
