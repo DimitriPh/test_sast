@@ -1,10 +1,22 @@
 import sqlite3
 
-# Exemple de vulnérabilité flagrante
-def vulnerable_function():
-    user_input = input("Entrez votre nom d'utilisateur : ")
-    query = f"SELECT * FROM users WHERE username = '{user_input}'"  # Injection SQL ici
-    print("Requête SQL :", query)
-    conn = sqlite3.connect('database.db')
-    conn.execute(query)  # Exécute une requête SQL avec une entrée non sécurisée
+# Vulnérabilité : Injection SQL
+def get_user_info(user_id):
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+    query = f"SELECT * FROM users WHERE id = {user_id}"  # Mauvaise pratique : concaténation directe
+    cursor.execute(query)
+    result = cursor.fetchall()
     conn.close()
+    return result
+
+# Vulnérabilité : Mot de passe en clair
+def store_password(user, password):
+    with open("passwords.txt", "a") as file:
+        file.write(f"{user}:{password}\n")  # Mauvaise pratique : stockage en clair
+
+# Fonction principale
+if __name__ == "__main__":
+    user_id = input("Entrez un ID utilisateur : ")
+    print(get_user_info(user_id))
+    store_password("admin", "password123")  # Exemple d'utilisation
