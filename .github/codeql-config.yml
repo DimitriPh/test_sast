@@ -1,4 +1,4 @@
 name: "CodeQL config"
 queries:
-  - uses: codeql/python-queries # Utilise les règles Python prédéfinies
-  - uses: codeql/javascript-queries # Utilise les règles JavaScript prédéfinies
+  - name: "Default Python Queries" # Requêtes Python par défaut
+  - name: "Default JavaScript Queries" # Requêtes JavaScript par défaut
